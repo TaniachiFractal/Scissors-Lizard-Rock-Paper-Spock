@@ -1,7 +1,16 @@
 <resources>
     <string name="app_name">Scissors-Lizard-Rock-Paper-Spock</string>
     <string name="comp_choice">Компьютер выбрал:</string>
-    <string name="you_won">Победа!</string>
-    <string name="you_lost">Поражение</string>
+    <string name="your_choice">Ваш выбор:</string>
+    <string name="you_won">Ты победил!</string>
+    <string name="you_lost">Ты проиграл</string>
     <string name="a_tie">Ничья</string>
+    <string name="sсissors">Ножницы</string>
+    <string name="lizard">Ящерица</string>
+    <string name="rock">Камень</string>
+    <string name="paper">Бумага</string>
+    <string name="spock">Спок</string>
+    <string name="make_a_choice">Пожалуйста, выберите действие</string>
+    <string name="select">Выбрать</string>
+    <string name="info">Инфо</string>
 </resources>
