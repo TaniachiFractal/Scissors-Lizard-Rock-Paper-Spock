@@ -2,8 +2,11 @@ package maslovat.taniachifractal.scissors_lizard_rock_paper_spock
 
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import maslovat.taniachifractal.scissors_lizard_rock_paper_spock.databinding.ActivityMainBinding
+import maslovat.taniachifractal.scissors_lizard_rock_paper_spock.databinding.InfoDialogBinding
+import org.w3c.dom.Text
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
@@ -15,16 +18,17 @@ class MainActivity : AppCompatActivity() {
         fld = ActivityMainBinding.inflate(layoutInflater)
         setContentView(fld.root)
 
-        fld.scissorsButton.setOnClickListener{choiceBt_Click(ScissorsId)}
-        fld.lizardButton.setOnClickListener{choiceBt_Click(LizardId)}
-        fld.rockButton.setOnClickListener{choiceBt_Click(RockId)}
-        fld.paperButton.setOnClickListener{choiceBt_Click(PaperId)}
-        fld.spockButton.setOnClickListener{choiceBt_Click(SpockId)}
+        fld.scissorsButton.setOnClickListener{choiceBt_Click(ScissorsId,"X")}
+        fld.lizardButton.setOnClickListener{choiceBt_Click(LizardId,"X")}
+        fld.rockButton.setOnClickListener{choiceBt_Click(RockId,"X")}
+        fld.paperButton.setOnClickListener{choiceBt_Click(PaperId,"X")}
+        fld.spockButton.setOnClickListener{choiceBt_Click(SpockId,"X")}
         fld.btSelect.setOnClickListener{btSelect_Click()}
+        fld.btInfo.setOnClickListener { btInfo_Click() }
     }
 
     /**Click a picture*/
-    private fun choiceBt_Click(actId:Int)
+    private fun choiceBt_Click(actId:Int,symbol:String)
     {
         fld.scissorsButton.text=""
         fld.lizardButton.text=""
@@ -34,31 +38,42 @@ class MainActivity : AppCompatActivity() {
         when(actId)
         {
             ScissorsId ->
-                fld.scissorsButton.text="X"
+                fld.scissorsButton.text=symbol
             LizardId ->
-                fld.lizardButton.text="X"
+                fld.lizardButton.text=symbol
             RockId ->
-                fld.rockButton.text="X"
+                fld.rockButton.text=symbol
             PaperId ->
-                fld.paperButton.text="X"
+                fld.paperButton.text=symbol
             SpockId ->
-                fld.spockButton.text="X"
+                fld.spockButton.text=symbol
             else -> return
         }
         playerChoice=actId
     }
 
+    /**Make a selection*/
     fun btSelect_Click()
     {
-        val make_a_choice_Toast = Toast.makeText(applicationContext,getText(R.string.make_a_choice),Toast.LENGTH_LONG)
+        val make_a_choice_Toast = Toast.makeText(applicationContext,getText(R.string.make_a_choice),Toast.LENGTH_SHORT)
         if (playerChoice==-1)
         {
             make_a_choice_Toast.show()
             return
         }
         genPcChoice()
+        choiceBt_Click(playerChoice,"#")
         playerChoice=-1
-        choiceBt_Click(-1)
+    }
+
+    fun btInfo_Click()
+    {
+        val dialogFld = InfoDialogBinding.inflate(layoutInflater)
+        val dialog = AlertDialog.Builder(this)
+            .setTitle(getText(R.string.info))
+            .setView(dialogFld.root)
+            .create()
+        dialog.show()
     }
 
     /**Generate PC choice and update its picture*/
